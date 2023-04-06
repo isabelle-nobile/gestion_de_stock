@@ -10,38 +10,18 @@ class Produit:
         self.conn.commit()
         return self.cursor.lastrowid
 
-    def read_produit(self, id):
-        sql = "SELECT * FROM produit WHERE id = %s"
-        val = (id,)
-        self.cursor.execute(sql, val)
-        result = self.cursor.fetchone()
-        if result is None:
-            return None
-        else:
-            return {'id': result[0], 'nom': result[1], 'description': result[2], 'prix': result[3]}
-    
     def read_all_produit(self):
         sql = "SELECT * FROM produit"
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
         save_produits = []
-        if result is None:
-            return None
-        else:
+        try:
             for produit in result:
-                save_produits.append({'id': produit[0], 'nom': produit[1], 'description': produit[2], 'prix': produit[3], 'quantite': produit[4], 'id_categorie': produit[5]})
+                save_produits.append(produit)
+        except IndexError:
+            return None
 
-            # convertir la liste de dictionnaires en une chaîne de caractères
-            save_produits_str = ""
-            for produit in save_produits:
-                produit_str = ""
-                for key, value in produit.items():
-                    produit_str += str(key) + ": " + str(value) + ", "
-                produit_str = produit_str[:-2] # supprimer la dernière virgule et l'espace
-                save_produits_str += produit_str + "\n"
-
-            return save_produits_str
-
+        return save_produits
 
     def update_produit(self, id, nom=None, description=None, prix=None, quantite=None, id_categorie=None):
         sql = "UPDATE produit SET"

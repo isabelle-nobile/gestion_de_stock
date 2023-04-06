@@ -27,17 +27,34 @@ class Categorie:
         else:
             return {'id': result[0], 'nom': result[1]}
     
+    def read_categorie_by_id(self, categorie_id):
+        return self.read_categorie(categorie_id)
+
+    
+    # def read_all_categorie(self):
+    #     sql = "SELECT * FROM categorie"
+    #     self.cursor.execute(sql)
+    #     result = self.cursor.fetchall()
+    #     save_categories = []
+    #     if result is None:
+    #         return None
+    #     else:
+    #         for categorie in result:
+    #             save_categories.append(f"Id de la catégorie: {categorie[0]}, Nom de la catégorie: {categorie[1]}")
+    #         return '\n'.join(save_categories)
+    
     def read_all_categorie(self):
         sql = "SELECT * FROM categorie"
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
-        save_categories = []
-        if result is None:
+        save_produits = []
+        try:
+            for produit in result:
+                save_produits.append(produit)
+        except IndexError:
             return None
-        else:
-            for categorie in result:
-                save_categories.append(f"Id de la catégorie: {categorie[0]}, Nom de la catégorie: {categorie[1]}")
-            return '\n'.join(save_categories)
+
+        return save_produits
 
         
     def update_categorie(self, id, nom):
