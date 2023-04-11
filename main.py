@@ -10,7 +10,7 @@
 # cursor = conn.cursor()
 # cursor.execute("CREATE DATABASE IF NOT EXISTS boutique")
 
-# # create the categorie table
+# create the categorie table
 # cursor.execute("USE boutique")
 # cursor.execute("""
 # CREATE TABLE IF NOT EXISTS categorie (
@@ -24,7 +24,7 @@
 # categorie.create_categorie("Vêtements")
 # categorie.create_categorie("Chaussure")
 
-# # create the produit table
+# create the produit table
 # cursor.execute("""
 # CREATE TABLE IF NOT EXISTS produit (
 #     id INT AUTO_INCREMENT PRIMARY KEY,

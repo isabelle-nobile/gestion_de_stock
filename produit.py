@@ -9,6 +9,17 @@ class Produit:
         self.cursor.execute(sql, val)
         self.conn.commit()
         return self.cursor.lastrowid
+    
+    def read_produit(self, id):
+        sql = "SELECT * FROM produit WHERE id = %s"
+        val = (id,)
+        self.cursor.execute(sql, val)
+        result = self.cursor.fetchone()
+        if result is None:
+            return None
+        else:
+            return {'id': result[0], 'nom': result[1], 'description': result[2], 'prix': result[3],'quantite': result[4],'id_categorie': result[5]}
+
 
     def read_all_produit(self):
         sql = "SELECT * FROM produit"

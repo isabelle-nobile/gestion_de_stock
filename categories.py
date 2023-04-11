@@ -55,6 +55,17 @@ class Categorie:
             return None
 
         return save_produits
+    
+    # dans la classe Categorie
+    def read_all_categories_modify(self):
+        sql = "SELECT * FROM categorie"
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        categories = []
+        for row in result:
+            categories.append(row[1])
+        return categories
+
 
         
     def update_categorie(self, id, nom):
