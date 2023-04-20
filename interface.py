@@ -15,7 +15,6 @@ class Application(tk.Frame):
         self.produit = Produit(self.conn)
         self.categorie = Categorie(self.conn)
         self.categorie_id_dict = {}
-
         self.master = master
         self.master.title("Gestion de stocks")
         self.master.iconbitmap('gestiondesstocksicon.ico')
@@ -348,11 +347,3 @@ class Application(tk.Frame):
 
         # Ajouter la fonction de rappel à la méthode bind du widget categories_listbox
         self.categories_listbox.bind("<<ListboxSelect>>", self.on_select)
-
-
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    app = Application(master=root)
-    app.mainloop()
-
